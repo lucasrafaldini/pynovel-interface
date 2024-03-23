@@ -1,0 +1,25 @@
+feniks.angle_gradient renpy.geometry renpy.matrixcolor renpy.texture
+renpy.ftl
+feniks.angle_gradient renpy.texture renpy.texture
+renpy.alpha renpy.solid
+renpy.dissolve renpy.dissolve
+feniks.angle_gradient renpy.geometry renpy.texture
+renpy.matrixcolor feniks.linear_gradient renpy.texture renpy.texture
+feniks.linear_gradient renpy.geometry renpy.matrixcolor renpy.texture
+renpy.imagedissolve renpy.imagedissolve
+renpy.alpha renpy.geometry renpy.solid
+renpy.mask renpy.mask
+renpy.matrixcolor feniks.angle_gradient renpy.texture renpy.texture
+renpy.geometry renpy.mask
+renpy.geometry renpy.imagedissolve
+renpy.solid
+renpy.matrixcolor feniks.radial_gradient renpy.texture renpy.texture
+renpy.texture
+renpy.geometry renpy.texture
+feniks.radial_gradient renpy.texture renpy.texture
+renpy.geometry renpy.solid
+feniks.radial_gradient renpy.geometry renpy.texture
+feniks.linear_gradient renpy.texture renpy.texture
+feniks.radial_gradient renpy.geometry renpy.matrixcolor renpy.texture
+renpy.dissolve renpy.geometry
+feniks.linear_gradient renpy.geometry renpy.texture
