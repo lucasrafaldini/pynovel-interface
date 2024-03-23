@@ -1,0 +1,144 @@
+{
+  "characters_and_achievements": [
+    {
+      "model": "julia",
+      "description": "Lorem ipsum dolor sit amet consectetur. Amet sapien amet mattis lacus egestas volutpat malesuada enim in. Lacus eget erat elementum phasellus aenean elit augue elit vitae. Venenatis sit tellus diam risus sagittis consequat. Elit quam accumsan nulla vel urna justo.",
+      "achievements": {
+        "went_games": "ep1 mon_arcade_julia_play_talks_queen",
+        "ep2_julia_kiss": "ep2 fri_game_ending_outfit",
+        "ep4_julialunch_kiss_julia": "ep4 julialunch_039",
+        "ep4_livingsituation_julia": "ep5 juliaday_031",
+        "ep5_juliaroof_we_will": "ep5 juliasex_085",
+        "ep7_gettingcaught_kiss_julia": "ep7 gettingcaught_012"
+      },
+      "max_points": 10,
+      "first_appearance": "ep1_08"
+    },
+    {
+      "model": "chloe",
+      "description": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eaque culpa quae vitae eveniet repudiandae porro deleniti minus vero aliquid consequatur modi dolorem excepturi voluptatem soluta non, nostrum tempora inventore ut.",
+      "achievements": {
+        "went_games": "ep1 mon_arcade_julia_play_talks_queen",
+        "ep2_julia_kiss": "ep2 fri_game_ending_outfit",
+        "ep4_julialunch_kiss_julia": "ep4 julialunch_039",
+        "ep4_livingsituation_julia": "ep5 juliaday_031",
+        "ep5_juliaroof_we_will": "ep5 juliasex_085",
+        "ep7_gettingcaught_kiss_julia": "ep7 gettingcaught_012"
+      },
+      "max_points": 10,
+      "first_appearance": "ep1_06"
+    },
+    {
+      "model": "alyssa",
+      "description": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eaque culpa quae vitae eveniet repudiandae porro deleniti minus vero aliquid consequatur modi dolorem excepturi voluptatem soluta non, nostrum tempora inventore ut.",
+      "achievements": {
+        "went_games": "ep1 mon_arcade_julia_play_talks_queen",
+        "ep2_julia_kiss": "ep2 fri_game_ending_outfit",
+        "ep4_julialunch_kiss_julia": "ep4 julialunch_039",
+        "ep4_livingsituation_julia": "ep5 juliaday_031",
+        "ep5_juliaroof_we_will": "ep5 juliasex_085",
+        "ep7_gettingcaught_kiss_julia": "ep7 gettingcaught_012"
+      },
+      "max_points": 10,
+      "first_appearance": "ep1_07"
+    },
+    {
+      "model": "sue",
+      "description": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eaque culpa quae vitae eveniet repudiandae porro deleniti minus vero aliquid consequatur modi dolorem excepturi voluptatem soluta non, nostrum tempora inventore ut.",
+      "achievements": {
+        "went_games": "ep1 mon_arcade_julia_play_talks_queen",
+        "ep2_julia_kiss": "ep2 fri_game_ending_outfit",
+        "ep4_julialunch_kiss_julia": "ep4 julialunch_039",
+        "ep4_livingsituation_julia": "ep5 juliaday_031",
+        "ep5_juliaroof_we_will": "ep5 juliasex_085",
+        "ep7_gettingcaught_kiss_julia": "ep7 gettingcaught_012"
+      },
+      "max_points": 10,
+      "first_appearance": "ep1_09"
+    },
+    {
+      "model": "gabby",
+      "description": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eaque culpa quae vitae eveniet repudiandae porro deleniti minus vero aliquid consequatur modi dolorem excepturi voluptatem soluta non, nostrum tempora inventore ut.",
+      "achievements": {
+        "went_games": "ep1 mon_arcade_julia_play_talks_queen",
+        "ep2_julia_kiss": "ep2 fri_game_ending_outfit",
+        "ep4_julialunch_kiss_julia": "ep4 julialunch_039",
+        "ep4_livingsituation_julia": "ep5 juliaday_031",
+        "ep5_juliaroof_we_will": "ep5 juliasex_085",
+        "ep7_gettingcaught_kiss_julia": "ep7 gettingcaught_012"
+      },
+      "max_points": 10,
+      "first_appearance": "ep5_10"
+    },
+    {
+      "model": "susan",
+      "description": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eaque culpa quae vitae eveniet repudiandae porro deleniti minus vero aliquid consequatur modi dolorem excepturi voluptatem soluta non, nostrum tempora inventore ut.",
+      "achievements": {
+        "went_games": "ep1 mon_arcade_julia_play_talks_queen",
+        "ep2_julia_kiss": "ep2 fri_game_ending_outfit",
+        "ep4_julialunch_kiss_julia": "ep4 julialunch_039",
+        "ep4_livingsituation_julia": "ep5 juliaday_031",
+        "ep5_juliaroof_we_will": "ep5 juliasex_085",
+        "ep7_gettingcaught_kiss_julia": "ep7 gettingcaught_012"
+      },
+      "max_points": 10,
+      "first_appearance": "ep1_09"
+    },
+    {
+      "model": "lily",
+      "description": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eaque culpa quae vitae eveniet repudiandae porro deleniti minus vero aliquid consequatur modi dolorem excepturi voluptatem soluta non, nostrum tempora inventore ut.",
+      "achievements": {
+        "went_games": "ep1 mon_arcade_julia_play_talks_queen",
+        "ep2_julia_kiss": "ep2 fri_game_ending_outfit",
+        "ep4_julialunch_kiss_julia": "ep4 julialunch_039",
+        "ep4_livingsituation_julia": "ep5 juliaday_031",
+        "ep5_juliaroof_we_will": "ep5 juliasex_085",
+        "ep7_gettingcaught_kiss_julia": "ep7 gettingcaught_012"
+      },
+      "max_points": 10,
+      "first_appearance": "ep1_02"
+    },
+    {
+      "model": "angela",
+      "description": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eaque culpa quae vitae eveniet repudiandae porro deleniti minus vero aliquid consequatur modi dolorem excepturi voluptatem soluta non, nostrum tempora inventore ut.",
+      "achievements": {
+        "went_games": "ep1 mon_arcade_julia_play_talks_queen",
+        "ep2_julia_kiss": "ep2 fri_game_ending_outfit",
+        "ep4_julialunch_kiss_julia": "ep4 julialunch_039",
+        "ep4_livingsituation_julia": "ep5 juliaday_031",
+        "ep5_juliaroof_we_will": "ep5 juliasex_085",
+        "ep7_gettingcaught_kiss_julia": "ep7 gettingcaught_012"
+      },
+      "max_points": 10,
+      "first_appearance": "ep2_01"
+    },
+    {
+      "model": "devilla",
+      "description": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eaque culpa quae vitae eveniet repudiandae porro deleniti minus vero aliquid consequatur modi dolorem excepturi voluptatem soluta non, nostrum tempora inventore ut.",
+      "achievements": {
+        "went_games": "ep1 mon_arcade_julia_play_talks_queen",
+        "ep2_julia_kiss": "ep2 fri_game_ending_outfit",
+        "ep4_julialunch_kiss_julia": "ep4 julialunch_039",
+        "ep4_livingsituation_julia": "ep5 juliaday_031",
+        "ep5_juliaroof_we_will": "ep5 juliasex_085",
+        "ep7_gettingcaught_kiss_julia": "ep7 gettingcaught_012"
+      },
+      "max_points": 10,
+      "first_appearance": "ep2_01"
+    },
+    {
+      "model": "emily",
+      "description": "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eaque culpa quae vitae eveniet repudiandae porro deleniti minus vero aliquid consequatur modi dolorem excepturi voluptatem soluta non, nostrum tempora inventore ut.",
+      "achievements": {
+        "went_games": "ep1 mon_arcade_julia_play_talks_queen",
+        "ep2_julia_kiss": "ep2 fri_game_ending_outfit",
+        "ep4_julialunch_kiss_julia": "ep4 julialunch_039",
+        "ep4_livingsituation_julia": "ep5 juliaday_031",
+        "ep5_juliaroof_we_will": "ep5 juliasex_085",
+        "ep7_gettingcaught_kiss_julia": "ep7 gettingcaught_012"
+      },
+      "max_points": 10,
+      "first_appearance": "ep1_11"
+    }
+  ]
+}
