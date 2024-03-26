@@ -228,7 +228,7 @@ style choice_button is default:
     properties gui.button_properties("choice_button")
 
 style choice_button_text is default:
-    properties gui.text_properties("choice_button")
+    properties gui.button_text_properties("choice_button")
 
 
 ## Quick Menu screen ###########################################################
@@ -267,14 +267,13 @@ init python:
 default quick_menu = True
 
 style quick_button is default
-
 style quick_button_text is button_text
 
 style quick_button:
     properties gui.button_properties("quick_button")
 
 style quick_button_text:
-    properties gui.text_properties("quick_button")
+    properties gui.button_text_properties("quick_button")
 
 
 ################################################################################
@@ -342,7 +341,7 @@ style navigation_button:
     properties gui.button_properties("navigation_button")
 
 style navigation_button_text:
-    properties gui.text_properties("navigation_button")
+    properties gui.button_text_properties("navigation_button")
 
 
 ## Main Menu screen ############################################################
@@ -412,11 +411,11 @@ style main_menu_version:
 ## This lays out the basic common structure of a game menu screen. It's called
 ## with the screen title, and displays the background, title, and navigation.
 ##
-## The scroll parameter can be None, or one of "viewport" or "vpgrid".
-## This screen is intended to be used with one or more children, which are
+## The scroll parameter can be None, or one of "viewport" or "vpgrid". When
+## this screen is intended to be used with one or more children, which are
 ## transcluded (placed) inside it.
 
-screen game_menu(title, scroll=None, yinitial=0.0, spacing=0):
+screen game_menu(title, scroll=None, yinitial=0.0):
 
     style_prefix "game_menu"
 
@@ -449,8 +448,6 @@ screen game_menu(title, scroll=None, yinitial=0.0, spacing=0):
                         side_yfill True
 
                         vbox:
-                            spacing spacing
-
                             transclude
 
                 elif scroll == "vpgrid":
@@ -465,8 +462,6 @@ screen game_menu(title, scroll=None, yinitial=0.0, spacing=0):
                         pagekeys True
 
                         side_yfill True
-
-                        spacing spacing
 
                         transclude
 
@@ -653,40 +648,27 @@ screen file_slots(title):
                         key "save_delete" action FileDelete(slot)
 
             ## Buttons to access other pages.
-            vbox:
+            hbox:
                 style_prefix "page"
 
                 xalign 0.5
                 yalign 1.0
 
-                hbox:
-                    xalign 0.5
+                spacing gui.page_spacing
 
-                    spacing gui.page_spacing
+                textbutton _("<") action FilePagePrevious()
 
-                    textbutton _("<") action FilePagePrevious()
+                if config.has_autosave:
+                    textbutton _("{#auto_page}A") action FilePage("auto")
 
-                    if config.has_autosave:
-                        textbutton _("{#auto_page}A") action FilePage("auto")
+                if config.has_quicksave:
+                    textbutton _("{#quick_page}Q") action FilePage("quick")
 
-                    if config.has_quicksave:
-                        textbutton _("{#quick_page}Q") action FilePage("quick")
+                ## range(1, 10) gives the numbers from 1 to 9.
+                for page in range(1, 10):
+                    textbutton "[page]" action FilePage(page)
 
-                    ## range(1, 10) gives the numbers from 1 to 9.
-                    for page in range(1, 10):
-                        textbutton "[page]" action FilePage(page)
-
-                    textbutton _(">") action FilePageNext()
-
-                if config.has_sync:
-                    if CurrentScreenName() == "save":
-                        textbutton _("Upload Sync"):
-                            action UploadSync()
-                            xalign 0.5
-                    else:
-                        textbutton _("Download Sync"):
-                            action DownloadSync()
-                            xalign 0.5
+                textbutton _(">") action FilePageNext()
 
 
 style page_label is gui_label
@@ -704,7 +686,7 @@ style page_label:
     ypadding 5
 
 style page_label_text:
-    textalign 0.5
+    text_align 0.5
     layout "subtitle"
     hover_color gui.hover_color
 
@@ -712,13 +694,13 @@ style page_button:
     properties gui.button_properties("page_button")
 
 style page_button_text:
-    properties gui.text_properties("page_button")
+    properties gui.button_text_properties("page_button")
 
 style slot_button:
     properties gui.button_properties("slot_button")
 
 style slot_button_text:
-    properties gui.text_properties("slot_button")
+    properties gui.button_text_properties("slot_button")
 
 
 ## Preferences screen ##########################################################
@@ -853,7 +835,7 @@ style radio_button:
     foreground "gui/button/radio_[prefix_]foreground.png"
 
 style radio_button_text:
-    properties gui.text_properties("radio_button")
+    properties gui.button_text_properties("radio_button")
 
 style check_vbox:
     spacing gui.pref_button_spacing
@@ -863,7 +845,7 @@ style check_button:
     foreground "gui/button/check_[prefix_]foreground.png"
 
 style check_button_text:
-    properties gui.text_properties("check_button")
+    properties gui.button_text_properties("check_button")
 
 style slider_slider:
     xsize 525
@@ -874,7 +856,7 @@ style slider_button:
     left_margin 15
 
 style slider_button_text:
-    properties gui.text_properties("slider_button")
+    properties gui.button_text_properties("slider_button")
 
 style slider_vbox:
     xsize 675
@@ -895,7 +877,7 @@ screen history():
     ## Avoid predicting this screen, as it can be very large.
     predict False
 
-    use game_menu(_("History"), scroll=("vpgrid" if gui.history_height else "viewport"), yinitial=1.0, spacing=gui.history_spacing):
+    use game_menu(_("History"), scroll=("vpgrid" if gui.history_height else "viewport"), yinitial=1.0):
 
         style_prefix "history"
 
@@ -952,7 +934,7 @@ style history_name:
 
 style history_name_text:
     min_width gui.history_name_width
-    textalign gui.history_name_xalign
+    text_align gui.history_name_xalign
 
 style history_text:
     xpos gui.history_text_xpos
@@ -960,7 +942,7 @@ style history_text:
     xanchor gui.history_text_xalign
     xsize gui.history_text_width
     min_width gui.history_text_width
-    textalign gui.history_text_xalign
+    text_align gui.history_text_xalign
     layout ("subtitle" if gui.history_text_xalign else "tex")
 
 style history_label:
@@ -1071,7 +1053,7 @@ screen mouse_help():
         text _("Accesses the game menu.")
 
     hbox:
-        label _("Mouse Wheel Up")
+        label _("Mouse Wheel Up\nClick Rollback Side")
         text _("Rolls back to earlier dialogue.")
 
     hbox:
@@ -1093,12 +1075,13 @@ screen gamepad_help():
         label _("Right Shoulder")
         text _("Rolls forward to later dialogue.")
 
+
     hbox:
         label _("D-Pad, Sticks")
         text _("Navigate the interface.")
 
     hbox:
-        label _("Start, Guide, B/Right Button")
+        label _("Start, Guide")
         text _("Accesses the game menu.")
 
     hbox:
@@ -1119,7 +1102,7 @@ style help_button:
     xmargin 12
 
 style help_button_text:
-    properties gui.text_properties("help_button")
+    properties gui.button_text_properties("help_button")
 
 style help_label:
     xsize 375
@@ -1128,7 +1111,7 @@ style help_label:
 style help_label_text:
     size gui.text_size
     xalign 1.0
-    textalign 1.0
+    text_align 1.0
 
 
 
@@ -1190,14 +1173,14 @@ style confirm_frame:
     yalign .5
 
 style confirm_prompt_text:
-    textalign 0.5
+    text_align 0.5
     layout "subtitle"
 
 style confirm_button:
     properties gui.button_properties("confirm_button")
 
 style confirm_button_text:
-    properties gui.text_properties("confirm_button")
+    properties gui.button_text_properties("confirm_button")
 
 
 ## Skip indicator screen #######################################################
@@ -1384,7 +1367,7 @@ style nvl_label:
     yanchor 0.0
     xsize gui.nvl_name_width
     min_width gui.nvl_name_width
-    textalign gui.nvl_name_xalign
+    text_align gui.nvl_name_xalign
 
 style nvl_dialogue:
     xpos gui.nvl_text_xpos
@@ -1392,7 +1375,7 @@ style nvl_dialogue:
     ypos gui.nvl_text_ypos
     xsize gui.nvl_text_width
     min_width gui.nvl_text_width
-    textalign gui.nvl_text_xalign
+    text_align gui.nvl_text_xalign
     layout ("subtitle" if gui.nvl_text_xalign else "tex")
 
 style nvl_thought:
@@ -1401,7 +1384,7 @@ style nvl_thought:
     ypos gui.nvl_thought_ypos
     xsize gui.nvl_thought_width
     min_width gui.nvl_thought_width
-    textalign gui.nvl_thought_xalign
+    text_align gui.nvl_thought_xalign
     layout ("subtitle" if gui.nvl_text_xalign else "tex")
 
 style nvl_button:
@@ -1410,96 +1393,7 @@ style nvl_button:
     xanchor gui.nvl_button_xalign
 
 style nvl_button_text:
-    properties gui.text_properties("nvl_button")
-
-
-## Bubble screen ###############################################################
-##
-## The bubble screen is used to display dialogue to the player when using speech
-## bubbles. The bubble screen takes the same parameters as the say screen, must
-## create a displayable with the id of "what", and can create displayables with
-## the "namebox", "who", and "window" ids.
-##
-## https://www.renpy.org/doc/html/bubble.html#bubble-screen
-
-screen bubble(who, what):
-    style_prefix "bubble"
-
-    window:
-        id "window"
-
-        if who is not None:
-
-            window:
-                id "namebox"
-                style "bubble_namebox"
-
-                text who:
-                    id "who"
-
-        text what:
-            id "what"
-
-style bubble_window is empty
-style bubble_namebox is empty
-style bubble_who is default
-style bubble_what is default
-
-style bubble_window:
-    xpadding 30
-    top_padding 5
-    bottom_padding 5
-
-style bubble_namebox:
-    xalign 0.5
-
-style bubble_who:
-    xalign 0.5
-    textalign 0.5
-    color "#000"
-
-style bubble_what:
-    align (0.5, 0.5)
-    text_align 0.5
-    layout "subtitle"
-    color "#000"
-
-define bubble.frame = Frame("gui/bubble.png", 55, 55, 55, 95)
-define bubble.thoughtframe = Frame("gui/thoughtbubble.png", 55, 55, 55, 55)
-
-define bubble.properties = {
-    "bottom_left" : {
-        "window_background" : Transform(bubble.frame, xzoom=1, yzoom=1),
-        "window_bottom_padding" : 27,
-    },
-
-    "bottom_right" : {
-        "window_background" : Transform(bubble.frame, xzoom=-1, yzoom=1),
-        "window_bottom_padding" : 27,
-    },
-
-    "top_left" : {
-        "window_background" : Transform(bubble.frame, xzoom=1, yzoom=-1),
-        "window_top_padding" : 27,
-    },
-
-    "top_right" : {
-        "window_background" : Transform(bubble.frame, xzoom=-1, yzoom=-1),
-        "window_top_padding" : 27,
-    },
-
-    "thought" : {
-        "window_background" : bubble.thoughtframe,
-    }
-}
-
-define bubble.expand_area = {
-    "bottom_left" : (0, 0, 0, 22),
-    "bottom_right" : (0, 0, 0, 22),
-    "top_left" : (0, 22, 0, 0),
-    "top_right" : (0, 22, 0, 0),
-    "thought" : (0, 0, 0, 0),
-}
+    properties gui.button_text_properties("nvl_button")
 
 
 

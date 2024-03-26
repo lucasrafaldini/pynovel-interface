@@ -18,7 +18,7 @@ screen character_screen(character):
     # Back button
     textbutton "←" style "back_button" action Hide("character_screen")
     # Character image
-    image Image(f"assets/characters/{character}.png", style="character_image_style")
+    image Image("assets/characters/%s.png" % character, style="character_image_style")
     vbox:
         # Character section
 
@@ -35,7 +35,7 @@ screen character_screen(character):
         text "YOUR RELATIONSHIP WITH [character!u]" style "relationship_label_style"
         # There's already one variable for each character's points, so we can use it to display the hearts
         # Ex: points_character1, points_character2, points_character3, etc.
-        $ exec(f"hearts = '♥' * points_{character}")
+        $ exec("hearts = '♥' * points_%s" % character)
         # Max points is 10, but max hearts are 5, so we need to divide by 2
         if len(hearts) < character_info["max_points"]//2:
             $ hearts = hearts + ("♡"* (character_info["max_points"]//2 - len(hearts)))
@@ -56,13 +56,13 @@ screen character_screen(character):
                 button style "scenes_button":
                     if not achievements[achievement]:
                         # We can use the 'im' object to apply a filter to the image
-                        add Frame(im.Scale(im.MatrixColor(Image(f"assets/images/{character_info['achievements'][achievement]}.webp"),  im.matrix.brightness(-0.2)), 178, 94))
+                        add Frame(im.Scale(im.MatrixColor(Image("assets/images/%s.webp" % character_info['achievements'][achievement]),  im.matrix.brightness(-0.2)), 178, 94))
                         # and add a lock image
                         add Image("/assets/lock.png", style="locked_scene_icon") 
                     else:
                         # I added this frame just to make the image as same size
                         # as the unlocked ones
-                        add Frame(im.Scale(Image(f"assets/images/{character_info['achievements'][achievement]}.webp"), 178, 94))
+                        add Frame(im.Scale(Image("assets/images/%s.webp" % character_info['achievements'][achievement]), 178, 94))
 
         # Characters gallery
         text "MORE CHARACTERS"   style "character_gallery_title_style"
@@ -75,7 +75,7 @@ screen character_screen(character):
                         if action_enable:
                             add Frame(Solid("#54106b7c"))
                             add Frame("assets/characters/%s.png" % char)
-                            $ exec(f"hearts = '♥' * points_{char}")
+                            $ exec("hearts = '♥' * points_%s" % char)
                             if len(hearts) < character_info["max_points"]//2:
                                 $ hearts = hearts + ("♡"* (character_info["max_points"]//2 - len(hearts)))
                             text hearts style "hearts_style" at hover_hide_unhide
