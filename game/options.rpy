@@ -12,7 +12,7 @@
 ##
 ## The _() surrounding the string marks it as eligible for translation.
 
-define config.name = _("interfacechallenge")
+define config.name = _("pynovelinterface")
 
 
 ## Determines if the title given above is shown on the main menu screen. Set
@@ -37,7 +37,7 @@ define gui.about = _p("""
 ## distribution. This must be ASCII-only, and must not contain spaces, colons,
 ## or semicolons.
 
-define build.name = "interfacechallenge"
+define build.name = "pynovelinterface"
 
 
 ## Sounds and music ############################################################
@@ -143,7 +143,7 @@ default preferences.afm_time = 15
 ## This generally should not be changed, and if it is, should always be a
 ## literal string, not an expression.
 
-define config.save_directory = "interfacechallenge-1710719746"
+define config.save_directory = "pynovelinterface-1711462487"
 
 
 ## Icon ########################################################################
@@ -196,9 +196,9 @@ init python:
     build.documentation('*.txt')
 
 
-## A Google Play license key is required to perform in-app purchases. It can be
-## found in the Google Play developer console, under "Monetize" > "Monetization
-## Setup" > "Licensing".
+## A Google Play license key is required to download expansion files and perform
+## in-app purchases. It can be found on the "Services & APIs" page of the Google
+## Play developer console.
 
 # define build.google_play_key = "..."
 

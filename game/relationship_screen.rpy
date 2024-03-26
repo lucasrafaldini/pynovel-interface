@@ -22,9 +22,9 @@ init python:
     # (points_julia starts with 2 because she is the main character and is used for test)
     for char in characters:
         if char == "julia":
-            exec(f"points_{char} = 2")
+            exec("points_%s = 2" % char)
         else:
-            exec(f"points_{char} = 0")
+            exec("points_%s = 0" % char)
 
     # Get the episode and scene of the first appearance of the character
     def get_episode(character):
@@ -53,10 +53,10 @@ screen relationship_screen():
                     # If the character is unlocked, show the button with the character image
                     add Frame(Solid("#54106b7c"))
                     add Frame("assets/characters/%s.png" % character)
-                    $ exec(f"hearts = '♥' * points_{character}")
+                    $ exec("hearts = '♥' * points_%s" % character)
                     if len(hearts) < character_info["max_points"]//2:
                         $ hearts = hearts + ("♡"* (character_info["max_points"]//2 - len(hearts)))
-                    text hearts style "hearts_style" at hover_hide_unhide
+                    text hearts style "hearts_style"
                     text "[character!u]" style "char_button_text"
                 else:
                     # If the character is locked, show a locked button
@@ -98,8 +98,10 @@ style hearts_style:
     bold True
     align(0.5, 0.9)
     size 20
-    color "#ffffff"
+    hover_color "#ffffff"
+    idle_color "#ffffff00"
 
+    
 style locked_char_icon:
     size 60
     xalign .5
@@ -110,9 +112,3 @@ style locked_char_button_text:
     size 18
     color "#898787"
     font "assets/fonts/Source Sans Pro.ttf"
-
-transform hover_hide_unhide:
-    on idle:
-        alpha 0.0
-    on hover:
-        alpha 1.0
