@@ -76,8 +76,7 @@ screen character_screen(character):
                             # Add a background to the character button
                             add Frame(Solid("#54106b7c"))
                             # If the player has unlocked the character, we display the character image
-                            add Frame("assets/characters/%s.png" % char, left=Borders(30, 30, 30, 30))
-
+                            add Frame("assets/characters/%s.png" % char)
                             $ exec("hearts = '♥' * points_%s" % char)
                             if len(hearts) < character_info["max_points"]//2:
                                 $ hearts = hearts + ("♡"* (character_info["max_points"]//2 - len(hearts)))
