@@ -11,7 +11,7 @@ init python:
         return rv
 
 # Purple default background
-image menu_background = Movie(play="assets/backgrounds/menu-background.webm", loop=True, slow=True)
+image menu_background = Movie(play="assets/backgrounds/menu-background.webm", loop=True)
 
 screen character_screen(character):
     add "menu_background"
@@ -73,12 +73,14 @@ screen character_screen(character):
                     $ action_enable = ShowMenu("character_screen", char) if (current_episode >= get_episode(char) and current_scene >= get_scene(char)) else None
                     button action action_enable style "character_detail_character_gallery":
                         if action_enable:
+                            # Add a background to the character button
                             add Frame(Solid("#54106b7c"))
+                            # If the player has unlocked the character, we display the character image
                             add Frame("assets/characters/%s.png" % char)
                             $ exec("hearts = '♥' * points_%s" % char)
                             if len(hearts) < character_info["max_points"]//2:
                                 $ hearts = hearts + ("♡"* (character_info["max_points"]//2 - len(hearts)))
-                            text hearts style "hearts_style" at hover_hide_unhide
+                            text hearts style "hearts_style"
                             text "[char!u]" style "char_button_text"
                         else:
                             add Frame(im.MatrixColor("assets/characters/%s.png"% char , im.matrix.brightness(-0.3)))
@@ -170,8 +172,11 @@ style character_detail_character_gallery:
     ysize 281
     idle_background Solid("#54106b7c")
     hover_background Solid("#ffffffff", alpha=0.1)
+    outlines [(8, "#fbfbfb", 0, 0)]
     
 style locked_scene_icon:
     size 3
     xalign .5
     yalign .5
+
+
