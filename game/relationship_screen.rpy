@@ -47,15 +47,13 @@ screen relationship_screen():
         for i, character in enumerate(characters):
             $ character_info = char_and_ach["characters_and_achievements"][i]
             # Check if the character is unlocked
-            $ action_enable = ShowMenu("character_screen", character) if (current_episode >= get_episode(character) and current_scene >= get_scene(character)) else None 
+            $ action_enable = ShowMenu("character_screen", character) if check_character_unlocked(current_episode, current_scene, character) else None 
             button action action_enable style "char_button":
                 if action_enable:
                     # If the character is unlocked, show the button with the character image
                     add Frame(Solid("#54106b7c"))
                     add Frame("assets/characters/%s.png" % character)
-                    $ exec("hearts = '♥' * points_%s" % character)
-                    if len(hearts) < character_info["max_points"]//2:
-                        $ hearts = hearts + ("♡"* (character_info["max_points"]//2 - len(hearts)))
+                    $ hearts = calculate_hearts(eval("points_%s" % character), character_info["max_points"])
                     text hearts style "hearts_style"
                     text "[character!u]" style "char_button_text"
                 else:

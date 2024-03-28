@@ -1,6 +1,6 @@
 init python:
     import re
-    
+
     # receive a folder and return a list of paths to the files in that folder
     def file_list(dir=""):
         list = renpy.list_files()
@@ -9,6 +9,17 @@ init python:
             if re.match(dir, f):
                 rv.append(f[(len(dir)):])
         return rv
+
+    def calculate_hearts(char_points, max_points):
+        max_hearts = max_points // 2
+        hearts = '♥' * char_points if char_points <= max_hearts else '♥' * max_hearts
+        if len(hearts) < max_hearts:
+            hearts = hearts + ("♡" * (max_hearts - len(hearts)))
+        return hearts
+    
+    def check_character_unlocked(current_episode, current_scene, character):
+        return current_episode > get_episode(character) or (current_episode == get_episode(character) and current_scene >= get_scene(character))
+
 
 # Purple default background
 image menu_background = Movie(play="assets/backgrounds/menu-background.webm", loop=True)
@@ -33,12 +44,7 @@ screen character_screen(character):
 
         # Relationship with character section (heart section)
         text "YOUR RELATIONSHIP WITH [character!u]" style "relationship_label_style"
-        # There's already one variable for each character's points, so we can use it to display the hearts
-        # Ex: points_character1, points_character2, points_character3, etc.
-        $ exec("hearts = '♥' * points_%s" % character)
-        # Max points is 10, but max hearts are 5, so we need to divide by 2
-        if len(hearts) < character_info["max_points"]//2:
-            $ hearts = hearts + ("♡"* (character_info["max_points"]//2 - len(hearts)))
+        $ hearts = calculate_hearts(eval("points_%s" % character), character_info["max_points"])
         text hearts style "hearts_style_character_desc"
         
         # Scenes gallery section
@@ -66,20 +72,23 @@ screen character_screen(character):
 
         # Characters gallery
         text "MORE CHARACTERS"   style "character_gallery_title_style"
+        # hbox style "arrow_box":
+            # textbutton "←" action   style "left_arrow"
+            # textbutton "→" action change_char_queue("right") style "right_arrow"
         hbox style "character_gallery_style":
-            for char in characters:
+            for i, char in enumerate(characters):
                 if char != character:
+                    $ character_info = char_and_ach["characters_and_achievements"][i]
                     # define a variable with an action if the player has unlocked the character
-                    $ action_enable = ShowMenu("character_screen", char) if (current_episode >= get_episode(char) and current_scene >= get_scene(char)) else None
+                    $ action_enable = ShowMenu("character_screen", char) if check_character_unlocked(current_episode, current_scene, char) else None
                     button action action_enable style "character_detail_character_gallery":
                         if action_enable:
                             # Add a background to the character button
                             add Frame(Solid("#54106b7c"))
                             # If the player has unlocked the character, we display the character image
                             add Frame("assets/characters/%s.png" % char)
-                            $ exec("hearts = '♥' * points_%s" % char)
-                            if len(hearts) < character_info["max_points"]//2:
-                                $ hearts = hearts + ("♡"* (character_info["max_points"]//2 - len(hearts)))
+
+                            $ hearts = calculate_hearts(eval("points_%s" % char), character_info["max_points"])
                             text hearts style "hearts_style"
                             text "[char!u]" style "char_button_text"
                         else:
@@ -88,6 +97,22 @@ screen character_screen(character):
                             $ text_label = "???"
                             text text_label style "locked_char_button_text"
 
+style arrow_box:
+    xpos 1280
+    ypos 260
+    spacing 20
+
+style left_arrow:
+    size 20
+    selected_color "#a7a4a4"
+    hover_color "#ffffff"
+    font "assets/fonts/Source Sans Pro.ttf"
+
+style right_arrow:
+    size 20
+    idle_color "#a7a4a4"
+    hover_color "#ffffff"
+    font "assets/fonts/Source Sans Pro.ttf"
 
 style back_button:
     xpos 190
@@ -99,8 +124,9 @@ style back_button:
     font "assets/fonts/Source Sans Pro.ttf"
 
 style character_image_style:
+    size (400, 400)
     xpos 1100
-    ypos 20
+    # ypos 20
 
 style scenes_button:
     xsize 178
@@ -164,7 +190,7 @@ style character_gallery_title_style:
 style character_gallery_style:
     xpos 180
     ypos 290
-    spacing 2
+    spacing 45
     background Solid("#54106b7c")
 
 style character_detail_character_gallery:
