@@ -36,7 +36,6 @@ init python:
         return int(re.match(r"ep(\d+)_(\d+)", episode).group(2))
 
 
-
 screen relationship_screen():
     add "black"
     add "menu_background"
@@ -47,7 +46,7 @@ screen relationship_screen():
         for i, character in enumerate(characters):
             $ character_info = char_and_ach["characters_and_achievements"][i]
             # Check if the character is unlocked
-            $ action_enable = ShowMenu("character_screen", character) if check_character_unlocked(current_episode, current_scene, character) else None 
+            $ action_enable = ShowMenu("character_screen", character, characters) if check_character_unlocked(current_episode, current_scene, character) else None 
             button action action_enable style "char_button":
                 if action_enable:
                     # If the character is unlocked, show the button with the character image

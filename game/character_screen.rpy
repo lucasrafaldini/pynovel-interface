@@ -19,12 +19,17 @@ init python:
     
     def check_character_unlocked(current_episode, current_scene, character):
         return current_episode > get_episode(character) or (current_episode == get_episode(character) and current_scene >= get_scene(character))
+    
+    def move_left(char_list):
+        return char_list[-1:] + char_list[:-1]
 
+    def move_right(char_list):
+        return char_list[1:] + char_list[:1]
 
 # Purple default background
 image menu_background = Movie(play="assets/backgrounds/menu-background.webm", loop=True)
 
-screen character_screen(character):
+screen character_screen(character, char_list):
     add "menu_background"
     # Back button
     textbutton "←" style "back_button" action Hide("character_screen")
@@ -37,8 +42,8 @@ screen character_screen(character):
         text character style "character_name_style"
         
         # Saving this info in a variable to use it later and simplify future indexing
-        $ character_info = char_and_ach["characters_and_achievements"][characters.index(character)]
-        
+        $ character_info = char_and_ach["characters_and_achievements"][char_list.index(character)]
+
         # Character description
         text character_info['description'] style "character_desc_style"
 
@@ -72,30 +77,29 @@ screen character_screen(character):
 
         # Characters gallery
         text "MORE CHARACTERS"   style "character_gallery_title_style"
-        # hbox style "arrow_box":
-            # textbutton "←" action   style "left_arrow"
-            # textbutton "→" action change_char_queue("right") style "right_arrow"
+        hbox style "arrow_box":
+            textbutton "←" action ShowMenu("character_screen", character, move_left(char_list))   style "left_arrow"
+            textbutton "→" action ShowMenu("character_screen", character, move_right(char_list))   style "right_arrow"
         hbox style "character_gallery_style":
-            for i, char in enumerate(characters):
-                if char != character:
-                    $ character_info = char_and_ach["characters_and_achievements"][i]
-                    # define a variable with an action if the player has unlocked the character
-                    $ action_enable = ShowMenu("character_screen", char) if check_character_unlocked(current_episode, current_scene, char) else None
-                    button action action_enable style "character_detail_character_gallery":
-                        if action_enable:
-                            # Add a background to the character button
-                            add Frame(Solid("#54106b7c"))
-                            # If the player has unlocked the character, we display the character image
-                            add Frame("assets/characters/%s.png" % char)
-
-                            $ hearts = calculate_hearts(eval("points_%s" % char), character_info["max_points"])
-                            text hearts style "hearts_style"
-                            text "[char!u]" style "char_button_text"
-                        else:
-                            add Frame(im.MatrixColor("assets/characters/%s.png"% char , im.matrix.brightness(-0.3)))
-                            add Image("/assets/lock.png", style="locked_char_icon")
-                            $ text_label = "???"
-                            text text_label style "locked_char_button_text"
+            $ cleaned_char_list = [char for char in char_list if char != character]
+            for i, char in enumerate(cleaned_char_list[:-4]): 
+                $ character_info = char_and_ach["characters_and_achievements"][i]
+                # define a variable with an action if the player has unlocked the character
+                $ action_enable = ShowMenu("character_screen", char, characters) if check_character_unlocked(current_episode, current_scene, char) else None
+                button action action_enable style "character_detail_character_gallery":
+                    if action_enable:
+                        # Add a background to the character button
+                        add Frame(Solid("#54106b7c"))
+                        # If the player has unlocked the character, we display the character image
+                        add Frame("assets/characters/%s.png" % char)
+                        $ hearts = calculate_hearts(eval("points_%s" % char), character_info["max_points"])
+                        text hearts style "hearts_style"
+                        text "[char!u]" style "char_button_text"
+                    else:
+                        add Frame(im.MatrixColor("assets/characters/%s.png"% char , im.matrix.brightness(-0.3)))
+                        add Image("/assets/lock.png", style="locked_char_icon")
+                        $ text_label = "???"
+                        text text_label style "locked_char_button_text"
 
 style arrow_box:
     xpos 1280
